@@ -1,0 +1,232 @@
+<html>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f0f4f3;
+}
+.container{
+    position: relative;
+    width: 350px;
+    height: 440px;
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Change the shadow style */
+    border-radius: 10px; /* Change the cornering design */
+}
+.container .content{
+    padding: 20px;
+}
+.container .content h2{
+    text-align: center;
+    color: #666666;
+    font-size: 24px;
+}
+.container .content .logo{
+    display: flex;
+    justify-content: center;
+}
+.container .content .logo img{
+    width: 100px;
+    height: auto;
+}
+.container .content .logo img:hover{
+    animation-name: spin-logo;
+    animation-duration: .8s;
+}
+.container .content .form{
+    margin-top: -10px;
+}
+.container .content .form .field{
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+}
+.container .content .form .field input{
+    height: 100%;
+    width: calc(100% - 40px);
+    outline: none;
+    border-radius: 25px;
+    border: none;
+    padding-left: 15px;
+    font-size: 17px;
+}
+.container .content .form .field input[type="email"]{
+    animation-name: slide-in-left;
+    animation-duration: .8s;
+}
+.container .content .form .field input[type="password"]{
+    animation-name: slide-in-right;
+    animation-duration: .8s;
+}
+.container .content .form .field span{
+    position: absolute;
+    width: 40px;
+    line-height: 50px;
+}
+.container .content .form .field span i{
+    color:#666666 ;
+}
+.container .content .form .field span:nth-child(2){
+    right: -10px; 
+}
+.container .content .form button{
+   height :50px ;
+   width :100% ;
+   border :none ;
+   outline :none ;
+   border-radius :25px ;
+   font-size :18px ;
+   font-weight :600 ;
+   color :#fff ;
+   margin-top :25px ;
+   cursor :pointer ;
+   background :linear-gradient(to right,#32be8f,#38d39f,#32be8f) ;
+   animation-name :slide-in-bottom ;
+   animation-duration :.8s ;
+}
+.container .content p{
+   text-align :center ;
+   margin-top :20px ;
+   font-size :16px ;
+   color :#666666 ;
+}
+@keyframes slide-in-left {
+from {
+transform :translateX(-100%) ;
+opacity :0 ;
+}
+to {
+transform :translateX(0%) ;
+opacity :1 ;
+}
+}
+
+@keyframes slide-in-right {
+from {
+transform :translateX(100%) ;
+opacity :0 ;
+}
+to {
+transform :translateX(0%) ;
+opacity :1 ;
+}
+}
+
+@keyframes slide-in-bottom {
+from {
+transform :translateY(100%) ;
+opacity :0 ;
+}
+to {
+transform :translateY(0%) ;
+opacity :1 ;
+}
+}
+
+@keyframes spin-logo {
+from {
+transform :rotate(0deg) ;
+opacity :1 ;
+}
+to {
+transform :rotate(360deg) ;
+opacity :1 ;
+}
+}
+
+@keyframes shake-input {
+from {
+transform :translateX(-10%) rotate(-2deg) scale(.98) ;
+opacity :1 ;
+}
+to {
+transform :translateX(10%) rotate(2deg) scale(1.02) ;
+opacity :1 ;
+}
+}
+
+@keyframes fade-in-form {
+from {
+transform :translateY(10%) ;
+opacity :0 ;
+}
+to {
+transform :translateY(0%) ;
+opacity :1 ;
+}
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<div class="content" id="form-content">
+<h2>DIU Student Portal</h2>
+<div class="logo">
+<img src="https://daffodil.family/dfamily/images/familylogo/new/diu2.png" alt="DIU Logo">
+</div>
+<form class="form" action="#" method="post" id="login-form">
+<div class="field" id="email-field">
+<input type="email" name="email" placeholder="Student ID Number" required>
+<span><i class="fas fa-envelope"></i></span>
+</div>
+<div class="field" id="password-field">
+<input type="password" name="password" placeholder="Password" required>
+<span><i class="fas fa-lock"></i></span>
+<span><i class="fas fa-eye"></i></span>
+</div>
+<button type="submit" id="login-button">LOG IN</button>
+</form>
+<p>Forget Password? <a href="#">Click Here</a></p>
+</div>
+</div>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+var loginForm = document.getElementById("login-form");
+var emailField = document.getElementById("email-field");
+var passwordField = document.getElementById("password-field");
+var loginButton = document.getElementById("login-button");
+var formContent = document.getElementById("form-content");
+
+// Add fade-in animation to the form content when the page loads
+formContent.style.animationName = "fade-in-form";
+formContent.style.animationDuration = ".8s";
+
+// Add shake animation to the input fields when they are empty or invalid
+loginForm.addEventListener("submit", function(event){
+    event.preventDefault();
+    var email = emailField.querySelector("input").value;
+    var password = passwordField.querySelector("input").value;
+    if (!email || !password) {
+        emailField.style.animationName = "shake-input";
+        emailField.style.animationDuration = ".8s";
+        passwordField.style.animationName = "shake-input";
+        passwordField.style.animationDuration = ".8s";
+    }
+});
+
+// Remove the shake animation when the input fields are focused
+emailField.addEventListener("focusin", function(){
+    emailField.style.animationName = "";
+});
+passwordField.addEventListener("focusin", function(){
+    passwordField.style.animationName = "";
+});
+
+// Add color change animation to the button when clicked
+loginButton.addEventListener("click", function(){
+    loginButton.style.background = "linear-gradient(to right,#38d39f,#32be8f,#38d39f)";
+});
+</script>
+</body>
+</html>
